@@ -47,7 +47,7 @@
 
     /*Si no existe el documento pero el php ha recibido un $_POST, se crea un documento con la información recibida*/
     else if(isset($_POST['nombre'])){
-        var_dump($_POST);
+        //var_dump($_POST);
         $archivo = fopen("datos.txt", "w+") or die("No se ha podido crear el archivo");
         $nombre = $_POST["nombre"];
         $apellido = $_POST["apellido"];
@@ -68,10 +68,38 @@
         echo $deportes;
         $imagen = $_FILES['fotoperfil']['name'];
 
-        echo $_FILES['fotoperfil']['name'];
+        //echo $_FILES['fotoperfil']['name'];
         $textoescribir = $nombre . ":" . $apellido . ":" . $fnacimiento . ":" . $deportes . ":" . $imagen;
         fwrite($archivo, $textoescribir) or die ("Error escribiendo el archivo");
         fclose($archivo);
+
+
+
+        /*Escribimos los datos recibidos por el $_POST*/
+        echo '<p>'.'Nombre: '.$_POST['nombre'].'.'.'</p>';
+            echo '<p>'.'Apellido: '.$_POST['apellido'].'.'.'</p>';
+            echo '<p>'.'Fecha nacimiento: '.$_POST['fnacimiento'].'.'.'</p>';
+            echo '<p>'.'Deportes: ';
+            foreach ($_POST['deporte'] as $depo) {
+            if ($depo=='n') {
+                echo "Natación ";
+            }
+            if ($depo=='b') {
+                echo "Baloncesto ";
+            }
+            if ($depo=='f') {
+                echo "Fútbol ";
+            }
+            if ($depo=='c') {
+                echo "Ciclismo ";
+            }
+            else{
+                
+            }
+        }
+            echo '</p>';
+            echo '<p>'.'Imagen: '.$_FILES['fotoperfil']['name'];
+
     }
 
 
