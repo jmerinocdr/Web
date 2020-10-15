@@ -4,17 +4,35 @@
     <body>
 <?php
     if(file_exists("datos.txt")){
-        $fichero = 'datos.txt';
-        $registros = file($fichero);
-        echo '<h1>Resumen de personas</h1>';
-        foreach ($registros as $registro) {
-            $campos = explode(':', $registro);
-            echo '<p>'.'Nombre: '.$campos[0].'.'.'</p>';
-            echo '<p>'.'Apellido: '.$campos[1].'.'.'</p>';
-        }
         //https://informaticapc.com/tutorial-php/manejo-de-archivos.php
-        $actual = file_get_contents($fichero);
-        
+        if(isset($_POST['nombre'])){
+            //var_dump($_POST);
+            $archivo = fopen("datos.txt", "a") or die("No se ha podido crear el archivo");
+            $nombre = $_POST["nombre"];
+            $apellido = $_POST["apellido"];
+            $fnacimiento = $_POST["fnacimiento"];
+            $deportes="";
+            $cont=0;
+            foreach ($_POST['deporte'] as $depo) {
+                if ($cont==0) {
+                    $deportes = $depo;
+                    //echo $cont . $depo;
+                    $cont++;
+                }
+                else{
+                    $deportes = $deportes . ',' . $depo;
+                    //echo $cont . $depo;
+                }
+            }
+            echo $deportes;
+            $imagen = $_FILES['fotoperfil']['name'];
+    
+            //echo $_FILES['fotoperfil']['name'];
+            $textoescribir = $nombre . ":" . $apellido . ":" . $fnacimiento . ":" . $deportes . ":" . $imagen;
+            fwrite($archivo, $textoescribir.PHP_EOL) or die ("Error escribiendo el archivo");
+            fclose($archivo);
+            header('location: MainPage.php');
+        }
     }
     else{
         echo "No hay datos, redirigiendo a la página para introducir datos";
@@ -23,4 +41,3 @@
 ?>
     </body>
 </html>
-

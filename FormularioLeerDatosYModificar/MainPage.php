@@ -8,17 +8,18 @@
     <body>
 <?php
 
-
     /*Aquí comprobamos si existe el documento*/
     if(file_exists("datos.txt")){
         $fichero = 'datos.txt';
         $registros = file($fichero);
+        echo '<table border="1">';
+        echo '<tr><td>Nombre</td><td>Apellido</td><td>Fecha nacimiento</td><td>Deportes</td><td>Imagen</td></tr>';
         foreach ($registros as $registro) {
             $campos = explode(':', $registro);
-            echo '<p>'.'Nombre: '.$campos[0].'.'.'</p>';
-            echo '<p>'.'Apellido: '.$campos[1].'.'.'</p>';
-            echo '<p>'.'Fecha nacimiento: '.$campos[2].'.'.'</p>';
-            echo '<p>'.'Deportes: ';
+            echo '<td>'.$campos[0].'.'.'</td>';
+            echo '<td>'.$campos[1].'.'.'</td>';
+            echo '<td>'.$campos[2].'.'.'</td>';
+            echo '<td>';
             $dcampos = explode(',', $campos[3]);
             for ($i=0; $i < count($dcampos); $i++) { 
                 if($dcampos[$i] == 'n'){
@@ -36,11 +37,12 @@
                 else{
                 }
             }
-            echo '</p>';
-            echo '<p>'.'Imagen: '.$campos[4];
+            echo '</td>';
+            echo '<td>'.'Imagen: '.$campos[4].'</td>';
         }
+        echo "</table>";
         echo '<p><a href="ModificarDatos.php">Modificar información</a></p>';
-        echo '<p><a href="AnadirDatos.php">Añadir datos</a></p>';
+        echo '<p><a href="FormularioAnadirDatos.php">Añadir datos</a></p>';
         echo '<p><a href="EliminarDatos.php">Eliminar datos</a></p>';
     }
 
