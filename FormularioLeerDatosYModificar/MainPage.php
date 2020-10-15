@@ -16,6 +16,7 @@
         echo '<tr><td>Nombre</td><td>Apellido</td><td>Fecha nacimiento</td><td>Deportes</td><td>Imagen</td></tr>';
         foreach ($registros as $registro) {
             $campos = explode(':', $registro);
+            echo '<tr>';
             echo '<td>'.$campos[0].'.'.'</td>';
             echo '<td>'.$campos[1].'.'.'</td>';
             echo '<td>'.$campos[2].'.'.'</td>';
@@ -39,6 +40,7 @@
             }
             echo '</td>';
             echo '<td>'.'Imagen: '.$campos[4].'</td>';
+            echo '</tr>';
         }
         echo "</table>";
         echo '<p><a href="ModificarDatos.php">Modificar información</a></p>';
@@ -72,7 +74,7 @@
 
         //echo $_FILES['fotoperfil']['name'];
         $textoescribir = $nombre . ":" . $apellido . ":" . $fnacimiento . ":" . $deportes . ":" . $imagen;
-        fwrite($archivo, $textoescribir) or die ("Error escribiendo el archivo");
+        fwrite($archivo, $textoescribir.PHP_EOL) or die ("Error escribiendo el archivo");
         fclose($archivo);
 
 
