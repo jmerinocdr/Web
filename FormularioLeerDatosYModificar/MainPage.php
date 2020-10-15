@@ -45,7 +45,7 @@
         echo "</table>";
         echo '<p><a href="ModificarDatos.php">Modificar información</a></p>';
         echo '<p><a href="FormularioAnadirDatos.php">Añadir datos</a></p>';
-        echo '<p><a href="EliminarDatos.php">Eliminar datos</a></p>';
+        echo '<p><a href="FormularioEliminarDatos.php">Eliminar datos</a></p>';
     }
 
 
