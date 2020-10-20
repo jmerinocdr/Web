@@ -23,6 +23,7 @@
                 $cont++;
             }
         }
+        header('location: MainPage.php');
         echo '<h1>Persona eliminada</h1>';
         //https://informaticapc.com/tutorial-php/manejo-de-archivos.php
     }
