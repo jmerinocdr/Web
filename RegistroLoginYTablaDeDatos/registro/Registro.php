@@ -36,6 +36,7 @@
 			        	$textoescribir = $nombre . ":" . $apellido . ":" . $email . ":" . $contrasena;
 			        	fwrite($archivo, $textoescribir.PHP_EOL) or die ("Error escribiendo el archivo");
 			        	fclose($archivo);
+                        header('location: ../MostrarDatos/MostrarDatos.php');
 			        }
     		}
         }
