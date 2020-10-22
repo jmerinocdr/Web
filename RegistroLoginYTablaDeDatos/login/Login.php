@@ -13,7 +13,13 @@
 
         	//Comprobamos si el correo y contrasena coinciden
         	if ($campos[2]==$_POST["email"] && $pcontrasena==$_POST["contrasena"]) {
+        		session_start();
+				// Guardar datos de sesión
+				$_SESSION["usuario"] = $_POST["email"];
+                $_SESSION["autorizado"] = "true";
+                session_regenerate_id();
         		echo "Accedido correctamente";
+        		header('location: ../MostrarDatos/MostrarDatos.php');
         		$existente=true;
         	}
         	else{
