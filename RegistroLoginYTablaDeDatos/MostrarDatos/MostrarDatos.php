@@ -45,7 +45,7 @@
                 echo '</tr>';
             }
             echo "</table>";
-            echo '<p><a href="../ModificarDatos/ModificarDatos.php">Modificar información</a></p>';
+            echo '<p><a href="../ModificarDatos/FormularioModificarDatos.php">Modificar información</a></p>';
             echo '<p><a href="../AnadirDatos/FormularioAnadirDatos.php">Añadir datos</a></p>';
             echo '<p><a href="../EliminarDatos/FormularioEliminarDatos.php">Eliminar datos</a></p>';
             echo '<p><a href="../Sesion/CerrarSesion.php">Cerrar sesión</a></p>';
