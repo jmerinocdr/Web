@@ -11,6 +11,8 @@
             if(isset($_POST['nombre'])){
                 //var_dump($_POST);
                 $archivo = fopen("../datos.txt", "a") or die("No se ha podido crear el archivo");
+                $pnombre = $_POST["pnombre"];
+                $papellido = $_POST["papellido"];
                 $nombre = $_POST["nombre"];
                 $apellido = $_POST["apellido"];
                 $fnacimiento = $_POST["fnacimiento"];
