@@ -1,0 +1,21 @@
+Create table usuario(
+	id INT(10) NOT NULL AUTO_INCREMENT,
+	nombre VARCHAR(15) NOT NULL,
+	nacido DATE,
+	sexo VARCHAR(2) NOT NULL CHECK(sexo IN ('H', 'M')),
+	foto VARCHAR(30), PRIMARY KEY (id)
+);
+
+create table usuario_deporte(
+foreign key (id_usuario) references usuario(id), foreign key (id_deportes) references deporte(id)
+);
+
+Create table deporte(
+	id INT(10) NOT NULL AUTO_INCREMENT,
+	nombre VARCHAR(20) NOT NULL,
+);
+
+Create table passwd(
+	usuario VARCHAR(15) NOT NULL,
+	clave
+);
