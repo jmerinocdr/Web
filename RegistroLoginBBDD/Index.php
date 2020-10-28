@@ -1,4 +1,4 @@
 <?php
-	require_once('HeaderFooter/header.php');
-	require_once('')
-	require_once('HeaderFooter/footer.php');
+	require_once('HeaderFooter/Header.php');
+	require_once('MenusHref/menuLoginRegistro.php');
+	require_once('HeaderFooter/Footer.php');

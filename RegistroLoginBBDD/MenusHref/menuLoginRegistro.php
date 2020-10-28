@@ -1,5 +1,5 @@
 
 <div>
-	<a href="../formularios/formLogin.php">Login</a>
-	<a href="../formularios/formRegistro.php">Registro</a>
+	<a href="php/login.php">Login</a>
+	<a href="php/registro.php">Registro</a>
 </div>
