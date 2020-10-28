@@ -1,40 +1,30 @@
 <?php 
 	class DAO
 	{
-		private $db = "";
+		private $user = 'root';
+		private $pass = '';
+		private $host = "localhost";
+		private $conn = "";
 
 		//Getters&Setters
-		public function setDB($db){
-			$this->db=$db;
+		public function setDB($conn){
+			$this->conn=$conn;
 		}
 		public function getDB(){
-			return $this->db;
+			return $this->conn;
 		}
 
 
 
 		//Usamos la Conexión y Ejecución de la base de datos
 		public function conectar($user, $pass){
-			$db = new PDO('mysql:host=localhost;dbname=Usuarios', $user, $pass);
+			$conn = new PDO('mysql:host=localhost;dbname=Usuarios', $user, $pass);
+			return $conn;
 		}
-		public function ejecutar()
-
-		public function crearTablaUsuario($conn){
-			$sql = "
-				CREATE TABLE usuario(
-					id INT(10) NOT NULL AUTO_INCREMENT,
-					nombre VARCHAR(15) NOT NULL,
-					nacido DATE,
-					sexo VARCHAR(2) NOT NULL CHECK(sexo IN ('H', 'M')),
-					foto VARCHAR(30), PRIMARY KEY (id)
-				);
-			";
+		public function ejecutar($conn, $sql, $array){
+			$stmt=$conn->prepare($sql);
+			$stmt->execute($array);
 		}
-
-
-
-		
-
 
 
 		//Escribir Leer y Modificar
