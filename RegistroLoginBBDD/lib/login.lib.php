@@ -6,11 +6,12 @@
         echo "Se ha creado el nuevo dao con los datos".SERVICE.USER.PASS.HOST,DBNAME;
         echo "<br>";
         echo "conectado correctamente";
+        echo "<br>";
 
 	if($db->dbExist()){
         $user=$_POST["user"];
         $password=$_POST["contrasena"];
-        if (checkUserPsw($db, $user, $password)->fetch()) {
+        if (checkUserPsw($db, $user, $password)) {
             session_start();
             // Guardar datos de sesión
             $_SESSION["usuario"] = $_POST["user"];
@@ -36,7 +37,7 @@
         var_dump($datos);
         foreach ($datos as $fila) {
             if($fila["usuario"]==$user && $fila["clave"]=$password){
-
+                $encontrado=true;
             }
             else{
 

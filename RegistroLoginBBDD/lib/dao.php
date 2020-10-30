@@ -8,14 +8,30 @@
 		function __construct($service, $user, $pass, $host, $dbname){
 				if($this->conectar($service, $user, $pass, $host, $dbname)){
 					echo "Conectado correctamente";
+					echo "<br>";
 				}
 				else{
 					echo "Base de datos no existe";
-					$this->crearBaseDatos();
-					echo "Base de datos creada";
-					$this->crearTablas();
-					echo "Tablas creadas"; 
+					echo "<br>";
+					if($this->conectarBase($service, $user, $pass, $host)){
+						echo "Conectado a base de datos basica";
+						echo "<br>";
+						$this->crearBaseDatos($dbname);
+						echo "Base de datos creada";
+						echo "<br>";
+						$this->conectar($service, $user, $pass, $host, $dbname);
+						$this->crearTablas();
+						echo "Tablas creadas"; 
+						echo "<br>";
+					}
+					else{
+						echo "No se ha conseguido conectar a la base de datos básica";
+						echo "<br>";
+					}
+					
+					
 				}
+
 		}
 
 		//Getters y Setters para obtener la conexión
@@ -37,6 +53,17 @@
 		}
 
 		//Usamos la Conexión y Ejecución de la base de datos
+		public function conectarBase($service, $user, $pass, $host){
+			$dbInfo = $service . ":host=" . $host;
+			try{
+				$conn = new PDO($dbInfo, $user, $pass);
+				$this->setDB($conn);
+				return true;
+			}
+			catch(PDOException $e){
+				return false;
+			}
+		}
 		public function conectar($service, $user, $pass, $host, $dbname){
 			$dbInfo = $service . ":host=" . $host . ";dbname=" . $dbname;
 			try{
@@ -45,8 +72,6 @@
 				return true;
 			}
 			catch(PDOException $e){
-				$this->crearBaseDatos();
-				$this->crearTablas();
 				return false;
 			}
 		}
@@ -62,32 +87,36 @@
 			switch($tabla){
 				case "Usuario":
 					$sql = "
-						SELECT * from usuario;
+						SELECT id, nombre, nacido, sexo, foto from usuario;
 					";
 				break;
 				case "UsuarioDeporte":
 					$sql = "
-						SELECT * from usuario;
+						SELECT id_usuario, id_deportes from usuario;
 					";
 				break;
 				case "Deporte":
 					$sql = "
-						SELECT * from deporte;
+						SELECT id, nombre from deporte;
 					";
 				break;
 				case "Passwd":
 					$sql = "
-						SELECT * from passwd; 
+						SELECT usuario, clave from passwd; 
 					";
 				break;
 			}
 			$arrayFilas=$this->conn->query($sql);
 			echo "<br>";
+			echo "Pasamos los datos de la tabla ".$tabla." ";
+			echo "<br>";
 			var_dump($arrayFilas);
+			echo "<br>";
 			return $arrayFilas;
 		}
 
 		public function escribirDatos($tabla, $datos){
+			$sql='';
 			switch($tabla){
 				case "Usuario":
 					$sql = "
@@ -108,11 +137,16 @@
 				break;
 				case "Passwd":
 					$sql = "
-						INSERT INTO passwd (nombre, clave)
-						VALUES (:nombre, :clave);
+						INSERT INTO passwd (usuario, clave)
+						VALUES (:usuario, :clave);
 					";
+					echo "Escribimos en Passwd";
+					echo "<br>";
 				break;
 			}
+			echo "Imprimimos el comando sql";
+			var_dump ($sql);
+			echo "<br>";
 			$this->ejecutar($sql, $datos);
 		}
 		public function modificarDatos($tabla, $nombre, $datos){
@@ -139,9 +173,9 @@
 				break;
 				case "Passwd":
 					$sql = "
-						INSERT INTO passwd (nombre, clave)
-						VALUES (:nombre, :clave);
-						WHERE nombre = :pnombre;
+						INSERT INTO passwd (usuario, clave)
+						VALUES (:usuario, :clave);
+						WHERE nombre = :usuario;
 					";
 				break;
 			}
@@ -149,17 +183,19 @@
 
 		// Incluimos los metodos para crear la base de datos
 		public function crearTablas(){
-			$this->crearTablaUsuario($conn);
-			$this->crearTablaDeporte($conn);
-			$this->crearTablaUsuarioDeporte($conn);
-			$this->crearTablaPassw($conn);
+			$this->crearTablaUsuario();
+			$this->crearTablaDeporte();
+			$this->crearTablaUsuarioDeporte();
+			$this->crearTablaPassw();
 		}
-		private function crearBaseDatos(){
+		private function crearBaseDatos($dbname){
 			$sql = "
-				CREATE DATABASE Usuario;
+				CREATE DATABASE {$dbname};
 			";
-			$array='';
+			$array= array('' => '');
 			$this->ejecutar($sql, $array);
+			echo "Base de datos ".$dbname." creada";
+			echo "<br>";
 		}
 		private function crearTablaUsuario(){
 			$sql = "
@@ -171,7 +207,10 @@
 					foto VARCHAR(30), PRIMARY KEY (id)
 				);
 			";
+			$array= array('' => '');
 			$this->ejecutar($sql, $array);
+			echo "Tabla usuario creada";
+			echo "<br>";
 		}
 
 		private function crearTablaUsuarioDeporte(){
@@ -181,7 +220,10 @@
 					FOREIGN KEY (id_deportes) REFERENCES deporte(id)
 				);
 			";
+			$array= array('' => '');
 			$this->ejecutar($sql, $array);
+			echo "Tabla usuariodeporte creada";
+			echo "<br>";
 		}
 
 		private function crearTablaDeporte(){
@@ -192,7 +234,10 @@
 					PRIMARY KEY (id)
 				);
 			";
+			$array= array('' => '');
 			$this->ejecutar($sql, $array);
+			echo "Tabla deporte creada";
+			echo "<br>";
 		}
 
 		private function crearTablaPassw(){
@@ -203,7 +248,11 @@
 					PRIMARY KEY (usuario) 
 				);
 			";
+			$array= array('' => '');
 			$this->ejecutar($sql, $array);
+			echo "Tabla Passwd creada";
+			echo "<br>";
 		}
+
 		
 	}
