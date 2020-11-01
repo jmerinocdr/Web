@@ -92,7 +92,7 @@
 				break;
 				case "UsuarioDeporte":
 					$sql = "
-						SELECT id_usuario, id_deportes from usuario;
+						SELECT id_usuario, id_deporte from usuario_deporte;
 					";
 				break;
 				case "Deporte":
@@ -126,7 +126,8 @@
 				break;
 				case "UsuarioDeporte":
 					$sql = "
-						SELECT id, nombre, nacido, sexo, foto from usuario;
+						INSERT INTO usuario_deporte (id_usuario, id_deporte)
+						VALUES (:id_usuario, id_deporte);
 					";
 				break;
 				case "Deporte":
@@ -215,10 +216,22 @@
 
 		private function crearTablaUsuarioDeporte(){
 			$sql = "
+
+				
 				CREATE TABLE usuario_deporte(
+					id_usuario INT(10) NOT NULL,
+					id_deporte INT(10) NOT NULL,
 					FOREIGN KEY (id_usuario) REFERENCES usuario(id), 
-					FOREIGN KEY (id_deportes) REFERENCES deporte(id)
+					FOREIGN KEY (id_deporte) REFERENCES deporte(id)
 				);
+				/*
+				CREATE TABLE usuario_deporte(
+					id_usuario INT(10) NOT NULL,
+					id_deporte INT(10) NOT NULL,
+					CONSTRAINT cons_fk_id_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+					CONSTRAINT cons_fk_id_deporte FOREIGN KEY (id_deporte) REFERENCES deporte(id)
+				);
+				*/
 			";
 			$array= array('' => '');
 			$this->ejecutar($sql, $array);

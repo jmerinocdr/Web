@@ -23,6 +23,10 @@
             var_dump ($datos);
             echo "<br>";
             $db->escribirDatos('Passwd', $datos);
+            header('Location: ../Index.php');
+        }
+        else{
+            header('Location: ../Index.php');
         }
         
     }
