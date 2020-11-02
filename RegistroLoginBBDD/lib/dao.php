@@ -182,6 +182,37 @@
 			}
 		}
 
+		public function eliminarDatos($tabla, $nombre){
+
+			switch($tabla){
+				case "Usuario":
+					$sql = "
+						DELETE FROM usuario 
+						WHERE nombre = :pnombre;
+					";
+				break;
+				case "UsuarioDeporte":
+					$sql = "
+						DELETE FROM usuario 
+						WHERE nombre = :pnombre;
+					";
+				break;
+				case "Deporte":
+					$sql = "
+						INSERT INTO deporte (nombre)
+						VALUES (:nombre);
+						WHERE nombre = :pnombre;
+					";
+				break;
+				case "Passwd":
+					$sql = "
+						DELETE FROM usuario 
+						WHERE nombre = :pnombre AND passwd = :passwd;
+					";
+				break;
+			}
+		}
+
 		// Incluimos los metodos para crear la base de datos
 		public function crearTablas(){
 			$this->crearTablaUsuario();
