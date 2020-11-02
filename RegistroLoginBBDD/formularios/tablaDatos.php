@@ -1,4 +1,4 @@
-<table>
+<table border="1">
 	<tr>
 		<td><p>Id</p></td>
 		<td><p>Nombre</p> </td>

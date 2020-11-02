@@ -107,11 +107,11 @@
 				break;
 			}
 			$arrayFilas=$this->conn->query($sql);
-			echo "<br>";
-			echo "Pasamos los datos de la tabla ".$tabla." ";
-			echo "<br>";
-			var_dump($arrayFilas);
-			echo "<br>";
+			//echo "<br>";
+			//echo "Pasamos los datos de la tabla ".$tabla." ";
+			//echo "<br>";
+			//var_dump($arrayFilas);
+			//echo "<br>";
 			return $arrayFilas;
 		}
 

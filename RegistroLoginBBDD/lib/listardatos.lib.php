@@ -9,15 +9,17 @@
         echo "<br>";
     if($db->dbExist()){
         $datos=$db->leerDatos('Usuario');
-        var_dump($datos);
+        //var_dump($datos);
         foreach ($datos as $fila) {
             echo "<tr>";
-            echo "<td>".$fila['id']."<td>";
-            echo "<td>".$fila['nombre']."<td>";
-            echo "<td>".$fila['nacido']."<td>";
-            echo "<td>".$fila['sexo']."<td>";
-            echo "<td>".listarDeportes($db, $fila["id"])."<td>";
-            echo "<td>".$fila['foto']."<td>";
+                echo "<td><p>".$fila['id']."</p></td>";
+                echo "<td><p>".$fila['nombre']."</p></td>";
+                echo "<td><p>".$fila['nacido']."</p></td>";
+                echo "<td><p>".$fila['sexo']."</p></td>";
+                echo "<td><p>".listarDeportes($db, $fila["id"])."</p></td>";
+                echo "<td><p>".$fila['foto']."</p></td>";
+                include_once('../Formularios/formDelModDatos.php');
+            echo "</tr>";
         }
     }
     else{
@@ -27,20 +29,25 @@
     }
 
     function listarDeportes($db, $id_usuario){
-    	$deportes;
+    	$deportes='| ';
     	$datos=$db->leerDatos('UsuarioDeporte');
-        var_dump($datos);
+        //var_dump($datos);
         
         foreach ($datos as $fila) {
             if ($id_usuario==$fila['id_usuario']) {
-            	$datos = ['id_deporte' => $fila['id_deporte']];
-            	$sql="
-            		SELECT nombre FROM deporte WHERE id=:id_deporte;
-            	";
-            	$db->ejecutar($sql, $datos);
+            	$datosDeporte=$db->leerDatos('Deporte');
+                foreach ($datosDeporte as $filaDeporte) {
+                    if ($fila['id_deporte']==$filaDeporte['id']) {
+                        $deportes = $deportes.$filaDeporte['nombre']." | ";
+                    }
+                    else{
+
+                    }
+                }
             }
             else{
 
             }
         }
+        return $deportes;
     }
