@@ -12,13 +12,14 @@
         //var_dump($datos);
         foreach ($datos as $fila) {
             echo "<tr>";
+                $id=$fila['id'];
                 echo "<td><p>".$fila['id']."</p></td>";
                 echo "<td><p>".$fila['nombre']."</p></td>";
                 echo "<td><p>".$fila['nacido']."</p></td>";
                 echo "<td><p>".$fila['sexo']."</p></td>";
                 echo "<td><p>".listarDeportes($db, $fila["id"])."</p></td>";
                 echo "<td><p>".$fila['foto']."</p></td>";
-                include_once('../Formularios/formDelModDatos.php');
+                include('../Formularios/formDelModDatos.php');
             echo "</tr>";
         }
     }

@@ -11,8 +11,9 @@
         $datos=$db->leerDatos('Deporte');
         var_dump($datos);
         foreach ($datos as $fila) {
-            echo '<li><p>'.$fila['nombre'].'<input type="checkbox" name="deporte" value="'.$fila['nombre'].'></p></li>';
-            echo "<br>";
+            //echo "<br>";
+            echo '<li><p>'.$fila['nombre'].'<input type="checkbox" name="deporte[]" value="'.$fila['nombre'].'"></p></li>';
+            //echo "<br>";
         }
     }
     else{

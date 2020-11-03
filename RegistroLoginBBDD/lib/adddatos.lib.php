@@ -13,60 +13,48 @@
         if(isset($_POST['nombre'])){
                 //var_dump($_POST);
                 $nombre = $_POST["nombre"];
-                $apellido = $_POST["apellido"];
                 $fnacimiento = $_POST["fnacimiento"];
                 $sexo = $_POST['sexo'];
-                $deportes="";
-                $cont=0;
-                foreach ($_POST['deporte'] as $depo) {
-                    if ($cont==0) {
-                        $deportes = $depo;
-                        //echo $cont . $depo;
-                        $cont++;
-                    }
-                    else{
-                        $deportes = $deportes . ',' . $depo;
-                        //echo $cont . $depo;
-                    }
-                }
-                echo $deportes;
                 $imagen = $_FILES['fotoperfil']['name'];
                 $datos=[
                     'nombre' => $nombre,
-                    'nacido' => $fnacimiento
-                    'sexo' => $sexo
-                    'foto' => $imagen
-                ]
+                    'nacido' => $fnacimiento,
+                    'sexo' => $sexo,
+                    'foto' => $imagen,
+                ];
                 $db->escribirDatos('Usuario', $datos);
-                escribir
+                escribirDatosDeporte($db, $_POST['deporte']);
                 header('location: ../php/principal.php');
             }
-
-
-        /*
-        $nombre=$_POST["usuario"];
-        $clave=$_POST["clave"];
-        $pclave=$_POST["pclave"];
-        if(checkDbPsw($clave, $pclave) && checkUsr($db, $usuario)){
-            $datos = [
-                'usuario' => $usuario,
-                'clave' => $clave,
-            ];
-            echo "<br>";
-            echo "Imprimimos los datos para escribir ";
-            echo "<br>";
-            var_dump ($datos);
-            echo "<br>";
-            $db->escribirDatos('Passwd', $datos);
-            header('Location: ../Index.php');
-        }
-        else{
-            header('Location: ../Index.php');
-        }
-        */
     }
     else{
     	echo "La base de datos no existe";
         $db->crearBase();
         header('Location: ../Index.php');
+    }
+
+    function escribirDatosDeporte($db, $deportes){
+        $ids_usuarios=$db->ultimoID('Usuario');
+        $id_usuario="";
+        foreach ($ids_usuarios as $id_usuarios) {
+            $id_usuario=$id_usuarios['id'];
+        }
+        $dbdeportes=$db->leerDatos('Deporte');
+        foreach ($dbdeportes as $dbdeporte) {
+            foreach ($deportes as $deporte) {
+                if ($dbdeporte['nombre']==$deporte) {
+                    echo "Asignamos a usuario".$id_usuario." el deporte ".$dbdeporte['id'];
+                    $datos=[
+                        'id_usuario' => $id_usuario,
+                        'id_deporte' => $dbdeporte['id'],
+                    ];
+                    $db->escribirDatos('UsuarioDeporte', $datos);
+                }
+                else{
+                    echo $dbdeporte['nombre']." no es igual a ".$deporte;
+                }
+            
+        }
+        }
+        
     }

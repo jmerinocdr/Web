@@ -127,7 +127,7 @@
 				case "UsuarioDeporte":
 					$sql = "
 						INSERT INTO usuario_deporte (id_usuario, id_deporte)
-						VALUES (:id_usuario, id_deporte);
+						VALUES (:id_usuario, :id_deporte);
 					";
 				break;
 				case "Deporte":
@@ -182,26 +182,27 @@
 			}
 		}
 
-		public function eliminarDatos($tabla, $nombre){
-
+		public function eliminarDatos($tabla, $pid){
+			$datos=[
+				'pid' => $pid,
+			];
 			switch($tabla){
 				case "Usuario":
 					$sql = "
 						DELETE FROM usuario 
-						WHERE nombre = :pnombre;
+						WHERE id = :pid;
 					";
 				break;
 				case "UsuarioDeporte":
 					$sql = "
-						DELETE FROM usuario 
-						WHERE nombre = :pnombre;
+						DELETE FROM usuario_deporte 
+						WHERE id_usuario = :pid;
 					";
 				break;
 				case "Deporte":
 					$sql = "
-						INSERT INTO deporte (nombre)
-						VALUES (:nombre);
-						WHERE nombre = :pnombre;
+						DELETE FROM deporte 
+						WHERE id = :pid;
 					";
 				break;
 				case "Passwd":
@@ -211,6 +212,38 @@
 					";
 				break;
 			}
+			echo "Imprimimos el comando sql";
+			var_dump ($sql);
+			echo "<br>";
+			$this->ejecutar($sql, $datos);
+		}
+
+		public function ultimoID($tabla){
+			$sql = '';
+			switch($tabla){
+				case "Usuario":
+					$sql = "
+						SELECT MAX(id) AS id from usuario;
+					";
+				break;
+				case "UsuarioDeporte":
+					$sql = "
+						SELECT MAX(id_usuario) AS id from usuario_deporte;
+					";
+				break;
+				case "Deporte":
+					$sql = "
+						SELECT MAX(id) AS id from deporte;
+					";
+				break;
+			}
+			$arrayFilas=$this->conn->query($sql);
+			//echo "<br>";
+			//echo "Pasamos los datos de la tabla ".$tabla." ";
+			//echo "<br>";
+			//var_dump($arrayFilas);
+			//echo "<br>";
+			return $arrayFilas;
 		}
 
 		// Incluimos los metodos para crear la base de datos
