@@ -150,19 +150,27 @@
 			echo "<br>";
 			$this->ejecutar($sql, $datos);
 		}
-		public function modificarDatos($tabla, $nombre, $datos){
+		public function modificarDatos($tabla, $datos){
 
 			switch($tabla){
 				case "Usuario":
 					$sql = "
-						INSERT INTO usuario (nombre, nacido, sexo, foto)
-						VALUES (:nombre, :nacido, :sexo, :foto) 
-						WHERE nombre = :pnombre;
+						UPDATE usuario 
+						SET 
+							nombre = :nombre, 
+							nacido = :nacido, 
+							sexo = :sexo, 
+							foto = :foto 
+						WHERE id = :pid;
 					";
 				break;
 				case "UsuarioDeporte":
 					$sql = "
-						SELECT id, nombre, nacido, sexo, foto from usuario;
+						UPDATE usuario_deporte 
+						SET 
+							id_usuario = :id_usuario, 
+							id_deporte = :id_deporte
+						WHERE id_usuario = :id_usuario;
 					";
 				break;
 				case "Deporte":
@@ -180,6 +188,10 @@
 					";
 				break;
 			}
+			echo "Imprimimos el comando sql";
+			var_dump ($sql);
+			echo "<br>";
+			$this->ejecutar($sql, $datos);
 		}
 
 		public function eliminarDatos($tabla, $pid){
