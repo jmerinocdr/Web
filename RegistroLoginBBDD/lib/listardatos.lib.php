@@ -3,10 +3,10 @@
     //$db=new DAO(SERVICE, USER, PASS, HOST, DBNAME);
     //echo "Se ha creado el nuevo dao con los datos".SERVICE.USER.PASS.HOST,DBNAME;
     $db=new DAO(SERVICE, USER, PASS, HOST, DBNAME);
-        echo "Se ha creado el nuevo dao con los datos".SERVICE.USER.PASS.HOST,DBNAME;
-        echo "<br>";
-        echo "conectado correctamente";
-        echo "<br>";
+        //echo "Se ha creado el nuevo dao con los datos".SERVICE.USER.PASS.HOST,DBNAME;
+        //echo "<br>";
+        //echo "conectado correctamente";
+        //echo "<br>";
     if($db->dbExist()){
         $datos=$db->leerDatos('Usuario');
         //var_dump($datos);

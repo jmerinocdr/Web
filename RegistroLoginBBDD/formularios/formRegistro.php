@@ -1,4 +1,5 @@
 <div>
+	<div class="formulario">
 		<form action="../lib/registro.lib.php" method="post">
 			<p>Nombre <input type="text" name="usuario" required=""></p>
 			<p>Contraseña <input type="password" name="clave" required=""></p>
@@ -6,3 +7,4 @@
 			<input type="submit" name="Enviar">
 		</form>
 	</div>
+</div>

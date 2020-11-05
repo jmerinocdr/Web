@@ -7,8 +7,8 @@
 		//Creamos el constructor del DAO
 		function __construct($service, $user, $pass, $host, $dbname){
 				if($this->conectar($service, $user, $pass, $host, $dbname)){
-					echo "Conectado correctamente";
-					echo "<br>";
+					//echo "Conectado correctamente";
+					//echo "<br>";
 				}
 				else{
 					echo "Base de datos no existe";

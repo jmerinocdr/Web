@@ -1,0 +1,44 @@
+body {
+	background-color: #76d7c4;
+	text-align: center;
+}
+
+header{
+	font-size: 30px;
+}
+.formulario{
+	display: flex;
+	aling-items: center;
+	justify-content: center;
+}
+form{
+	text-align: left;
+}
+table {
+	border-top: hidden;
+	border-bottom: hidden;
+	border-left: hidden;
+	border-right: hidden;
+	border-radius: 15px;
+	border-collapse: collapse;
+	margin: 0 auto;
+	align-self: center;
+	background-color: #a3e4d7;
+	text-align: center;
+}
+td {
+	border: 1px solid;
+  	padding: 1em;
+}
+a {
+	padding: 1em;
+	color: black;
+	background-color: #a3e4d7;
+	border-radius: 15px;
+	outline: none;
+  	text-decoration: none;
+  	padding: 2px 1px 0;
+}
+div{
+	padding-top: 20px;
+}
