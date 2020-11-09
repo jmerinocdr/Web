@@ -1,13 +1,7 @@
 <?php
     require_once('lib.php');
-    //$db=new DAO(SERVICE, USER, PASS, HOST, DBNAME);
-    //echo "Se ha creado el nuevo dao con los datos".SERVICE.USER.PASS.HOST,DBNAME;
     $db=new DAO(SERVICE, USER, PASS, HOST, DBNAME);
-        //echo "Se ha creado el nuevo dao con los datos".SERVICE.USER.PASS.HOST,DBNAME;
-        //echo "<br>";
-        //echo "conectado correctamente";
-        //echo "<br>";
-
+    //Si la base de datos existe, guardamos el usuario y clave
 	if($db->dbExist()){
         $usuario=$_POST["usuario"];
         $clave=$_POST["clave"];
@@ -30,11 +24,14 @@
         }
         
     }
+    //Si la base no existe, se crea
     else{
     	echo "La base de datos no existe";
         $db->crearBase();
         header('Location: ../Index.php');
     }
+
+    //Confirmamos que este usuario no existe
     function checkUsr($db, $usuario){
         $noEncontrado=true;
         $datos=$db->leerDatos('Passwd');
@@ -49,6 +46,7 @@
         return $noEncontrado;
     }
 
+    //Confirmamos que las dos contrasenas son iguales
     function checkDbPsw($clave, $pclave){
         if ($clave==$pclave) {
             return true;

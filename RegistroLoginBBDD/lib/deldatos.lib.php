@@ -1,12 +1,9 @@
 <?php
     require_once('lib.php');
 	$db=new DAO(SERVICE, USER, PASS, HOST, DBNAME);
-        //echo "Se ha creado el nuevo dao con los datos".SERVICE.USER.PASS.HOST,DBNAME;
-        //echo "<br>";
-        //echo "conectado correctamente";
-        //echo "<br>";
+    //Si la base de datos existe, procedemos al borrado de los datos del usuario
     if($db->dbExist()){
-
+        //Borramos los datos de la taba UsuarioDeporte
         $datosUD=$db->leerDatos('UsuarioDeporte');
         foreach ($datosUD as $filaUD) {
             if($filaUD['id_usuario']==$_POST['id_usuario']){
@@ -17,7 +14,7 @@
 
             }
         }
-        
+        //Borramos los datos de la tabla Usuario
         $datosUsuario=$db->leerDatos('Usuario');
         foreach ($datosUsuario as $filaUsuario) {
             if($filaUsuario['id']==$_POST['id_usuario']){
@@ -30,9 +27,10 @@
             }
         }
 
-        
+        //Volvemos a la página principal tras eliminar los datos
         header('Location: ../php/principal.php');
     }
+    //Si la base de datos no existe, se crea
     else{
     	echo "La base de datos no existe";
         $db->crearBase();

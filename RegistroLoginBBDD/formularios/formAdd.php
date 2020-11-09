@@ -16,7 +16,7 @@
             <?php include_once('../lib/listardeportes.php'); ?>
         </ul>
         <p>Introduce una foto de perfi <input type="file" name="fotoperfil" id="fotoperfil"></p>
-        <p><input type="submit" value="enviar"></p>
+        <p><input class="boton" type="submit" value="enviar"></p>
     </form>
     </div>
 </body>

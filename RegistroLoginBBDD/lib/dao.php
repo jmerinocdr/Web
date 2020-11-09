@@ -107,11 +107,6 @@
 				break;
 			}
 			$arrayFilas=$this->conn->query($sql);
-			//echo "<br>";
-			//echo "Pasamos los datos de la tabla ".$tabla." ";
-			//echo "<br>";
-			//var_dump($arrayFilas);
-			//echo "<br>";
 			return $arrayFilas;
 		}
 
@@ -250,11 +245,6 @@
 				break;
 			}
 			$arrayFilas=$this->conn->query($sql);
-			//echo "<br>";
-			//echo "Pasamos los datos de la tabla ".$tabla." ";
-			//echo "<br>";
-			//var_dump($arrayFilas);
-			//echo "<br>";
 			return $arrayFilas;
 		}
 
@@ -300,14 +290,6 @@
 					FOREIGN KEY (id_usuario) REFERENCES usuario(id), 
 					FOREIGN KEY (id_deporte) REFERENCES deporte(id)
 				);
-				/*
-				CREATE TABLE usuario_deporte(
-					id_usuario INT(10) NOT NULL,
-					id_deporte INT(10) NOT NULL,
-					CONSTRAINT cons_fk_id_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-					CONSTRAINT cons_fk_id_deporte FOREIGN KEY (id_deporte) REFERENCES deporte(id)
-				);
-				*/
 			";
 			$array= array('' => '');
 			$this->ejecutar($sql, $array);

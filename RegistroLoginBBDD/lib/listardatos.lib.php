@@ -1,15 +1,9 @@
 <?php
  require_once('lib.php');
-    //$db=new DAO(SERVICE, USER, PASS, HOST, DBNAME);
-    //echo "Se ha creado el nuevo dao con los datos".SERVICE.USER.PASS.HOST,DBNAME;
     $db=new DAO(SERVICE, USER, PASS, HOST, DBNAME);
-        //echo "Se ha creado el nuevo dao con los datos".SERVICE.USER.PASS.HOST,DBNAME;
-        //echo "<br>";
-        //echo "conectado correctamente";
-        //echo "<br>";
+    //Si existe la base de datos, listamos los datos de cada usuario
     if($db->dbExist()){
         $datos=$db->leerDatos('Usuario');
-        //var_dump($datos);
         foreach ($datos as $fila) {
             echo "<tr>";
                 $id=$fila['id'];
@@ -18,7 +12,7 @@
                 echo "<td><p>".$fila['nacido']."</p></td>";
                 echo "<td><p>".$fila['sexo']."</p></td>";
                 echo "<td><p>".listarDeportes($db, $fila["id"])."</p></td>";
-                echo "<td><p>".$fila['foto']."</p></td>";
+                echo "<td><p><img src =".DIRECTORIO.$fila['foto']." /></p></td>";
                 include('../Formularios/formDelModDatos.php');
             echo "</tr>";
         }
@@ -29,10 +23,10 @@
         header('Location: ../Index.php');
     }
 
+    //Listamos los deportes del usuario
     function listarDeportes($db, $id_usuario){
     	$deportes='| ';
     	$datos=$db->leerDatos('UsuarioDeporte');
-        //var_dump($datos);
         
         foreach ($datos as $fila) {
             if ($id_usuario==$fila['id_usuario']) {

@@ -1,4 +1,5 @@
 <?php
+//Confirmamos que la sesion está autorizada
 function checkSession(){
 	session_start();
         $state=false;

@@ -6,3 +6,5 @@
 	define('HOST', 'localhost');
 	define('DBNAME', 'usuarios');
 	//
+	//Información del directorio donde se guardan las imagenes
+	define('DIRECTORIO', '../img/');

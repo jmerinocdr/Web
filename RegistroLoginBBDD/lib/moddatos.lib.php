@@ -1,17 +1,10 @@
 <?php
     require_once('lib.php');
-    //$db=new DAO(SERVICE, USER, PASS, HOST, DBNAME);
-    //echo "Se ha creado el nuevo dao con los datos".SERVICE.USER.PASS.HOST,DBNAME;
     $db=new DAO(SERVICE, USER, PASS, HOST, DBNAME);
-        //echo "Se ha creado el nuevo dao con los datos".SERVICE.USER.PASS.HOST,DBNAME;
-        //echo "<br>";
-        //echo "conectado correctamente";
-        //echo "<br>";
 
 	if($db->dbExist()){
-
+        //Si recibe un post con un valor nombre, procede a modificar los datos
         if(isset($_POST['nombre'])){
-            //var_dump($_POST);
             $id_usuario = $_POST['id'];
             $nombre = $_POST["nombre"];
             $fnacimiento = $_POST["fnacimiento"];
@@ -27,15 +20,20 @@
             $db->modificarDatos('Usuario', $datos);
             $db->eliminarDatos('UsuarioDeporte', $id_usuario);
             escribirDatosDeporte($db, $_POST['deporte']);
+            guardarImagen(DIRECTORIO, 'fotoperfil');
             header('location: ../php/principal.php');
         }
+        //Si recibe un id de usuario, muestra el formulario de ese
         else if(isset($_POST['id_usuario'])){
             mostrarFormulario($db);
         }
+        //Si por algún error se llega a esta página, reenviamos al inicio
         else{
             echo "no se ha pasado ni el id ni más valores";
+            header('Location: ../Index.php');
         }
     }
+    //Si la base de datos no existe, se crea
     else{
     	echo "La base de datos no existe";
         $db->crearBase();
@@ -43,7 +41,7 @@
     }
 
 
-
+    //Esta función muestra el formulario para modificar los datos del usuario
     function mostrarFormulario($db){
         $usuarios = $db->leerDatos('Usuario');
             foreach ($usuarios as $usuario) {
@@ -73,11 +71,11 @@
             
                     echo "<p>¿Qué deportes haces?</p>";
                     echo '<ul>';
-                        //include('../lib/listardeportesmod.php?variable=$deportes');
+                        //Llamamos a la función listardeportes
                         listardeportes($db, $deportes);
                     echo '</ul>';
-                    echo '<p>Introduce una foto de perfi <input type="file" name="fotoperfil" id="fotoperfil"></p>';
-                    echo '<input type="submit" name="Modificar" value="Enviar">';
+                    echo '<p>Introduce una foto de perfi <input type="file" name="fotoperfil" id="fotoperfil" value="'.$imagen.'"></p>';
+                    echo '<input  class="boton"  type="submit" name="Modificar" value="Enviar">';
                 }
             }
     }
@@ -86,61 +84,45 @@
 
 
 
-
+    //Esta variable recorre todos los deportes, los que tenga el usuario, los checkea
     function listardeportes($db, $deportes){
         $datos=$db->leerDatos('Deporte');
-        //var_dump($datos);
         foreach ($datos as $fila) {
-            //echo "<br>";
             $cont=0;
             foreach ($deportes as $deporte) {
-                //echo $fila['nombre']." y ".$deporte;
-                //echo "<br>";
                 if ($deporte==$fila['nombre']) {
                     echo '<li><p>'.$fila['nombre'].'<input type="checkbox" name="deporte[]" value="'.$fila['nombre'].'" checked></p></li>';
                     $cont=1;
                 }
-                
-                //else if($cont==0 && $imp==0){
-                    //echo '<li><p>'.$fila['nombre'].'<input type="checkbox" name="deporte[]" value="'.$fila['nombre'].'" ></p></li>';
-                    //$cont=1;
-                //}
-
             }
             if($cont==0){
                 echo '<li><p>'.$fila['nombre'].'<input type="checkbox" name="deporte[]" value="'.$fila['nombre'].'" ></p></li>';
             }
-            //echo '<li><p>'.$fila['nombre'].'<input type="checkbox" name="deporte[]" value="'.$fila['nombre'].'"></p></li>';
-            //echo "<br>";
         }
     }
+
+    //Creamos un array de todos los deportes que hace el usuario
     function leerdeportes($db,  $id_usuario){
         $databaseUD=$db->leerDatos('UsuarioDeporte');
-        //$databaseDeportes=$db->leerDatos('Deporte');
         $arraydeportes=array();
         foreach ($databaseUD as $fila) {
             if ($fila['id_usuario']==$id_usuario) {
-                //echo "El id del usuario es ".$id_usuario." y el id deporte es ".$fila['id_deporte'];
-                //echo "<br>";
                 $id_deporte=$fila['id_deporte'];
-                //echo "Hemos asignado el id deporte ".$id_deporte;
                 $databaseDeportes=$db->leerDatos('Deporte');
                 foreach ($databaseDeportes as $deporte) {
                     if($deporte['id']==$id_deporte){
-                        //echo "Anadimos al array de deportes el deporte".$deporte['nombre'];
-                        //echo "<br>";
                         array_push($arraydeportes, $deporte['nombre']);
                         echo "<br>";
                     }
                     else{
-                        //echo $id_deporte." no es igual a ".$deporte['id'];
-                        //echo "<br>";
                     }
                 }
             }
         }
         return $arraydeportes;
     }
+
+    //Escribimos todos los deportes que hace el usuario
     function escribirDatosDeporte($db, $deportes){
         $ids_usuarios=$db->ultimoID('Usuario');
         $id_usuario="";
@@ -166,3 +148,29 @@
         }
         
     }
+
+    //Guardamos la imagen
+    function guardarImagen($directorio_destino, $nombre_fichero)
+{
+    $tmp_name = $_FILES[$nombre_fichero]['tmp_name'];
+    //si hemos enviado un directorio que existe realmente y hemos subido el archivo    
+    if (is_dir($directorio_destino) && is_uploaded_file($tmp_name))
+    {
+        $img_file = $_FILES[$nombre_fichero]['name'];
+        $img_type = $_FILES[$nombre_fichero]['type'];
+        echo 1;
+        // Si se trata de una imagen   
+        if (((strpos($img_type, "gif") || strpos($img_type, "jpeg") ||
+ strpos($img_type, "jpg")) || strpos($img_type, "png")))
+        {
+            //¿Tenemos permisos para subir la imágen?
+            echo 2;
+            if (move_uploaded_file($tmp_name, $directorio_destino . '/' . $img_file))
+            {
+                return true;
+            }
+        }
+    }
+    //Si llegamos hasta aquí es que algo ha fallado
+    return false;
+}
