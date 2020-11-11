@@ -17,7 +17,7 @@ $config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src"), $i
 
 // database configuration parameters
 $connectionParams = array(
-    'dbname' => 'RegistroLoginDoctrine',
+    'dbname' => 'registrologindoctrine',
     'user' => 'root',
     'password' => '',
     'host' => 'localhost',

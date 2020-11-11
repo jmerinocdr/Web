@@ -8,27 +8,26 @@ use Doctrine\ORM\Mapping as ORM;
 
 class Deporte{
     
-    /*
-    * @ORM\id
-    * @ORM\Column(type"integer")
+    /**
+    * @ORM\Id
+    * @ORM\Column(name="id", type="integer")
     * @ORM\GeneratedValue
     */
     protected $id;
 
-    /*
-    * @ORM\Column(type"string")
+    /**
+    * @ORM\Column(type="string")
     */
     protected $nombre;
-
+    
     /**
-     * Muchos usuarios tienen muchos Deportes
-     * @ORM\ManyToMany(targetEntity="Usuario", inversedBy="Deporte")
-     * @ORM\JoinTable(name="Usuario_Deporte")
-     */
-    private $Usuarios;
+    * Muchos usuarios tienen muchos Deportes
+    * @ORM\ManyToMany(targetEntity="Usuario", mappedBy="Deporte")
+    */
+    private $usuarios;
 
     public function __construct() {
-        $this->Usuarios = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->usuarios = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function getId()
@@ -36,13 +35,21 @@ class Deporte{
         return $this->id;
     }
 
-    public function getName()
+    public function getUsuarios()
     {
-        return $this->name;
+        return $this->usuarios;
+    }
+    public function setUsuarios($usuarios)
+    {
+        $this->usuarios = $usuarios;
     }
 
-    public function setName($name)
+    public function getNombre()
     {
-        $this->name = $name;
+        return $this->nombre;
+    }
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
     }
 }

@@ -8,14 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 class Passwd{
 
-    /*
+    /**
     * @ORM\id
-    * @ORM\Column(type"string")
+    * @ORM\Column(type="string")
     */
     protected $nombre;
 
-    /*
-    * @ORM\Column(type"string")
+    /**
+    * @ORM\Column(type="string")
     */
     protected $contrasena;
 
