@@ -1,0 +1,30 @@
+mysql -u root
+CREATE DATABASE RegistroLoginDoctrine;
+USE RegistroLoginDoctrine;
+
+CREATE TABLE Usuario(
+	id INT(10) NOT NULL AUTO_INCREMENT,
+	nombre VARCHAR(15) NOT NULL,
+	nacido DATE,
+	sexo VARCHAR(2) NOT NULL CHECK(sexo IN ('H', 'M')),
+	foto VARCHAR(30), PRIMARY KEY (id)
+);
+
+CREATE TABLE Deporte(
+	id INT(10) NOT NULL AUTO_INCREMENT,
+	nombre VARCHAR(20) NOT NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE Usuario_Deporte(
+	id_usuario INT(10) NOT NULL,
+	id_deporte INT(10) NOT NULL,
+	FOREIGN KEY (id_usuario) REFERENCES usuario(id), 
+	FOREIGN KEY (id_deporte) REFERENCES deporte(id)
+);
+
+Create table Passwd(
+	usuario VARCHAR(15) NOT NULL,
+	clave VARCHAR(15) NOT NULL,
+	PRIMARY KEY (usuario) 
+);

@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 
 class Deporte{
+    
     /*
     * @ORM\id
     * @ORM\Column(type"integer")
@@ -18,6 +19,17 @@ class Deporte{
     * @ORM\Column(type"string")
     */
     protected $nombre;
+
+    /**
+     * Muchos usuarios tienen muchos Deportes
+     * @ORM\ManyToMany(targetEntity="Usuario", inversedBy="Deporte")
+     * @ORM\JoinTable(name="Usuario_Deporte")
+     */
+    private $Usuarios;
+
+    public function __construct() {
+        $this->Usuarios = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     public function getId()
     {

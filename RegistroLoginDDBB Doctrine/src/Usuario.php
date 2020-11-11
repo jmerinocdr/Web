@@ -8,15 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 class Usuario{
 
-    /**
-    * @ManyToMany(targetEntity="Deporte")
-    * @JoinTable(name="Usuario_Deporte",
-    *      joinColumns={@JoinColumn(name="Usuario_id", referencedColumnName="id")},
-    *      inverseJoinColumns={@JoinColumn(name="Deporte_id", referencedColumnName="id", unique=true)}
-    *      )
-    */
-    protected $deportes;
-
     /*
     * @ORM\id
     * @ORM\Column(type"integer")
@@ -29,11 +20,25 @@ class Usuario{
     */
     protected $nombre;
 
+     /**
+     * Muchos usuarios tienen muchos Deportes
+     * @ORM\ManyToMany(targetEntity="Deporte", inversedBy="Usuario")
+     * @ORM\JoinTable(name="Usuario_Deporte")
+     */
+    private $Deportes;
 
     public function __construct() {
-        $this->deportes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Deportes = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+    public function getDeportes()
+    {
+        return $this->deportes;
+    }
+    public function setDeportes($deportes)
+    {
+        $this->deportes = $deportes;
+    }
 
     public function getId()
     {
