@@ -59,5 +59,19 @@ if(!empty($_POST('accion'))){
                 echo "<td>".$passwd->getContrasena()."</td>";
             echo "</tr>";
         break;
+        case 'loginPsw':
+            $passwd = $entityManager->find('Passwd', $nombre);
+            if ($passwd === null) {
+                echo "No User found.\n";
+                exit(1);
+            }
+            if($passwd->getContrasena()==$contrasena){
+                echo "Accedido correctamente con el usuario ".$passwd->getNombre();
+                session_start();
+                // Guardar datos de sesión
+                $_SESSION["usuario"] = $passwd->getNombre();
+                $_SESSION["validado"] = true;
+            }
+        break;
     }
 }
