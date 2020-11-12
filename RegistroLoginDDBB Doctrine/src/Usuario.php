@@ -21,14 +21,33 @@ class Usuario{
     protected $nombre;
 
     /**
+    * @ORM\Column(type="date")
+    */
+    protected $fnacimiento;
+
+    /**
+    * @ORM\Column(type="string")
+    */
+    protected $sexo;
+
+    /**
+    * @ORM\Column(type="string")
+    */
+    protected $foto;
+
+    /**
     * Muchos usuarios tienen muchos Deportes
     * @ORM\ManyToMany(targetEntity="Deporte", inversedBy="Usuario")
     * @ORM\JoinTable(name="Usuario_Deporte")
     */
     private $deportes;
 
-    public function __construct() {
+    public function __construct($nombre, $fnacimiento, $sexo, $foto) {
         $this->deportes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setNombre($nombre);
+        $this->setFnacimiento($fnacimiento);
+        $this->setSexo($sexo);
+        $this->setFoto($foto);
     }
 
 
@@ -53,5 +72,34 @@ class Usuario{
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
+    }
+
+    public function getFnacimiento()
+    {
+        return $this->fnacimiento;
+    }
+    public function setFnacimiento($fnacimiento)
+    {
+        $this->fnacimiento = $fnacimiento;
+    }
+
+    public function getSexo()
+    {
+        return $this->sexo;
+    }
+    public function setSexo($sexo)
+    {
+        if($sexo=='H'||$sexo=='M'){
+            $this->sexo = $sexo; 
+        }
+    }
+
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
     }
 }
