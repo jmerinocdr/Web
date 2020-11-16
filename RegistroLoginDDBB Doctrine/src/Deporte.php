@@ -35,6 +35,16 @@ class Deporte{
         return $this->id;
     }
 
+    public function addUsuario(Usuario $usuario)
+    {
+        if ($this->usuarios->contains($usuario)) {
+            return;
+        }
+
+        $this->usuarios->add($usuario);
+        $usuario->addUsuario($this);
+    }
+
     public function getUsuarios()
     {
         return $this->usuarios;

@@ -56,6 +56,24 @@ class Usuario{
         return $this->id;
     }
 
+    public function addDeporte(Deporte $deporte){
+        if($this->deportes->contains($deporte)){
+            return;
+        }
+        $this->deportes->add($deporte);
+        $deporte->addDeporte($this);
+    }
+
+    public function removeDeporte(Deporte $deporte)
+    {
+        if (!$this->deportes->contains($deporte)) {
+            return;
+        }
+
+        $this->deportes->removeElement($deporte);
+        $deporte->removeUser($this);
+    }
+
     public function getDeportes()
     {
         return $this->deportes;
