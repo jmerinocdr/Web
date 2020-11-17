@@ -40,9 +40,17 @@ class Deporte{
         if ($this->usuarios->contains($usuario)) {
             return;
         }
-
         $this->usuarios->add($usuario);
         $usuario->addUsuario($this);
+    }
+
+    public function removeUsuario(Usuario $usuario)
+    {
+        if (!$this->usuarios->contains($usuario)) {
+            return;
+        }
+        $this->usuarios->removeElement($usuario);
+        $usuario->removeUsuario($this);
     }
 
     public function getUsuarios()

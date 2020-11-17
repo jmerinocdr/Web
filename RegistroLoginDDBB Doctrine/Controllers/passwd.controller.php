@@ -1,13 +1,15 @@
 <?php
 require_once "../bootstrap.php";
-if(!empty($_POST('accion'))){
-    $accion=$_POST('accion');
-    $datos=$_POST('datos');
-    
-    $nombre=$_POST('nombre');
-    $contrasena=$_POST('contrasena');
+if(!empty($_POST['accion'])){
+    $accion=$_POST['accion'];
+    //$datos=$_POST['datos'];
+    if($_POST['array']=='true'){
+        $contrasenap=$_POST['contrasenap'];
+    }
+    $nombre=$_POST['usuario'];
+    $contrasena=$_POST['contrasena'];
 
-    switch($_POST('accion')){
+    switch($_POST['accion']){
         case 'add':
             $passwd = new Passwd($nombre, $contrasena);
 
@@ -59,9 +61,32 @@ if(!empty($_POST('accion'))){
                 echo "<td>".$passwd->getContrasena()."</td>";
             echo "</tr>";
         break;
+
+        case 'registerPsw':
+            $passwd = $entityManager->find('Passwd', $nombre);
+            if ($passwd === null && $contrasena==$contrasenap) {
+                echo "No User found.\n";
+                $passwd = new Passwd($nombre, $contrasena);
+
+                $entityManager->persist($passwd);
+                $entityManager->flush();
+
+                echo "Created User ".$passwd->getNombre()." with password " . $passwd->getContrasena() . "\n";
+
+                echo "Accedido correctamente con el usuario ".$passwd->getNombre();
+                session_start();
+                // Guardar datos de sesión
+                $_SESSION["usuario"] = $passwd->getNombre();
+                $_SESSION["autorizado"] = "true";
+
+                $act="tablaDatos";
+                header("Location: ../php/principal.php?act=$act");
+            }
+        break;
+
         case 'loginPsw':
             $passwd = $entityManager->find('Passwd', $nombre);
-            if ($passwd === null) {
+            if ($passwd == null) {
                 echo "No User found.\n";
                 exit(1);
             }
@@ -70,7 +95,9 @@ if(!empty($_POST('accion'))){
                 session_start();
                 // Guardar datos de sesión
                 $_SESSION["usuario"] = $passwd->getNombre();
-                $_SESSION["validado"] = true;
+                $_SESSION["autorizado"] = "true";
+                $act="tablaDatos";
+                header("Location: ../php/principal.php?act=$act");
             }
         break;
     }

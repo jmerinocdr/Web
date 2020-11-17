@@ -19,6 +19,12 @@ class Passwd{
     */
     protected $contrasena;
 
+    public function __construct($nombre, $contrasena) {
+        $this->deportes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setNombre($nombre);
+        $this->setContrasena($contrasena);
+    }
+
     public function getNombre()
     {
         return $this->nombre;

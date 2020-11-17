@@ -42,11 +42,12 @@ class Usuario{
     */
     private $deportes;
 
-    public function __construct($nombre, $fnacimiento, $sexo, $foto) {
+    public function __construct($nombre, $fnacimiento, $sexo, $deportes, $foto) {
         $this->deportes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->setNombre($nombre);
         $this->setFnacimiento($fnacimiento);
         $this->setSexo($sexo);
+        $this->setDeportes($deportes);
         $this->setFoto($foto);
     }
 
@@ -69,9 +70,8 @@ class Usuario{
         if (!$this->deportes->contains($deporte)) {
             return;
         }
-
         $this->deportes->removeElement($deporte);
-        $deporte->removeUser($this);
+        $deporte->removeDeporte($this);
     }
 
     public function getDeportes()

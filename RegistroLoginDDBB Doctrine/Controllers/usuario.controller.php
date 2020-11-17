@@ -1,22 +1,21 @@
 <?php
 require_once "../bootstrap.php";
-if(!empty($_POST('accion'))){
-    $accion=$_POST('accion');
-    $datos=$_POST('datos');
-    if($datos='array'){
-        $id=$_POST('id');
-        $nombre=$_POST('nombre');
-        $fnacimiento=$_POST('fnacimiento');
-        $sexo=$_POST('sexo');
-        $foto=$_POST('foto');
+if(!empty($_POST['accion'])){
+    $accion=$_POST['accion'];
+    $datos=$_POST['datos'];
+    if($datos="array"){
+        $id=$_POST['id'];
+        $nombre=$_POST['nombre'];
+        $fnacimiento=$_POST['fnacimiento'];
+        $sexo=$_POST['sexo'];
+        $foto=$_POST['foto'];
     }
-    else{
-        $id=$_POST('id');
+    else if($datos="id"){
+        $id=$_POST['id'];
     }
-    switch($_POST('accion')){
+    switch($_POST['accion']){
         case 'add':
-            $usuario = new Usuario($nombre, $fnacimiento, $sexo, $foto);
-
+            $usuario = new Usuario($nombre, $fnacimiento, $sexo, $deportes, $foto);
             $entityManager->persist($usuario);
             $entityManager->flush();
 
@@ -47,15 +46,17 @@ if(!empty($_POST('accion'))){
         break;
         case 'mostrarTodos':
             $usuarioRepository = $entityManager->getRepository('Usuario');
-            $usuarios = $productRepository->findAll();
+            $usuarios = $usuarioRepository->findAll();
 
             foreach ($usuarios as $usuario) {
                 echo "<tr>";
-                    echo "<td>".$usuario->getNombre()."<td>";
-                    echo "<td>".$usuario->getFnacimiento()."<td>";
-                    echo "<td>".$usuario->getSexo()."<td>";
-                    echo "<td>".$usuario->getDeportes()."<td>";
-                    echo "<td>".$usuario->getFoto()."<td>";
+                    echo "<td>".$usuario->getId()."</td>";
+                    echo "<td>".$usuario->getNombre()."</td>";
+                    echo "<td>".date_format($usuario->getFnacimiento(), 'd-m-Y')."</td>";
+                    echo "<td>".$usuario->getSexo()."</td>";
+                    var_dump($usuario->getDeportes());
+                    echo "<td>".$usuario->getDeportes()."</td>";
+                    echo "<td>".$usuario->getFoto()."</td>";
                 echo "</tr>";
             }
         break;
