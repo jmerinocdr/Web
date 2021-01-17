@@ -1,0 +1,75 @@
+GESTIÓN DE USUARIOS
+
+===============================================================================
+Derechos de uso:
+
+La aplicación ha sido desarrollada por Amadeo Mora para uso educativo.
+
+Puede ser utilizada, leída, modificada y distribuida libremente.
+
+===============================================================================
+Descripción:
+
+Aplicación que mantiene una lista de usuarios.
+
+===============================================================================
+Estructura de la aplicación:
+
+- css
+- data
+---- fotos
+- inc
+- lib
+- php
+- tpl
+
+css: hojas de estilo
+data: ficheros de datos
+data/fotos: fotos subidas
+inc: cabecera y pie de la página
+lib: configuración, clases, clases dao y librerías de la aplicación
+php: páginas de la aplicación
+tpl: plantillas de las pantallas
+
+===============================================================================
+Base de datos:
+
+- Tabla: passwd
+
+Usuarios y claves de acceso autorizado a la aplicación.
+
+usuario TEXT PRIMARY KEY
+clave TEXT NOT NULL
+
+- Tabla: usuarios
+
+id INTEGER PRIMARY KEY AUTOINCREMENT - Id
+nombre TEXT NOT NULL - Nombre
+nacido TEXT - Fecha de nacimiento
+sexo TEXT - Sexo
+foto TEXT - Foto
+
+- Tabla: deportes
+
+id INTEGER PRIMARY KEY AUTOINCREMENT
+nombre TEXT NOT NULL
+
+- Tabla: usuarios_deportes
+
+id_usuario INTEGER NOT NULL
+id_deporte INTEGER NOT NULL
+PRIMARY KEY (id_usuario, id_deporte)
+FOREIGN KEY (id_usuario)
+    REFERENCES usuarios (id)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+FOREIGN KEY (id_deporte)
+    REFERENCES deportes (id)
+        ON UPDATE RESTRICT
+        ON DELETE RESTRICT
+
+La imagen de la foto se guarda en el directorio data/fotos manteniendo el 
+nombre del fichero subido.
+
+Tanto el directorio data como data/fotos deben tener permisos de lectura y
+escritura para el servidor web.

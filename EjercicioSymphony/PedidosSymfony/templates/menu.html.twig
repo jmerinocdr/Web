@@ -1,0 +1,10 @@
+{% if app.user %}
+<div class="menu">
+    <a href="{{ path ( 'restaurantes_index' ) }}">Restaurantes</a>
+    <a href="{{ path ( 'pedidos_index' ) }}">Pedidos</a>
+    <a href="{{ path ( 'productos_index' ) }}">Productos</a>
+    <a href="{{ path ( 'categorias_index' ) }}">Categorias</a>
+    {{ app.user.username }}
+    <a href="{{ path ( 'app_logout' ) }}">Salir</a>
+</div>
+{% endif %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Restaurantes{% endblock %}
+
+{% block body %}
+
+<div class="titulo">
+    <h1>Aplicación Restaurantes</h1>
+</div>
+<div class="logint">
+    <a href="{{ path ( 'app_login' ) }}">Login</a>
+</div>
+<div class="registert">
+    <a href="{{ path ( 'app_register' ) }}">Registro</a>
+</div>
+{% endblock %}

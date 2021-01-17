@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista Categorias{% endblock %}
+
+{% block body %}
+    <h1>Lista Categorias</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CodCat</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categoria in categorias %}
+            <tr>
+                <td>{{ categoria.id }}</td>
+                <td>{{ categoria.CodCat }}</td>
+                <td>{{ categoria.Nombre }}</td>
+                <td>{{ categoria.Descripcion }}</td>
+                <td>
+                    <a href="{{ path('categorias_show', {'id': categoria.id}) }}">Ver</a>
+                    <a href="{{ path('categorias_edit', {'id': categoria.id}) }}">Editar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">No se encontraron registros</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('categorias_new') }}">Create new</a>
+{% endblock %}

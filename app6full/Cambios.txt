@@ -1,0 +1,3 @@
+Ficheros modificados:
+-tpl/list.php => Se ha agregado el campo de texto y el botón para la búsqueda (con su correspondiente filtrado) y el botón para la exportación de la base de datos
+-lib/exportar.dao.php => Se ha creado este archivo, que es el encargado de exportar todas las tablas de sqlite a un archivo xml

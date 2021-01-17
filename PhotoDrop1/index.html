@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/menu.css">
+
+	<script language="JavaScript">
+    function mueveReloj(){
+        momentoActual = new Date()
+        hora = momentoActual.getHours()
+        minuto = momentoActual.getMinutes()
+        segundo = momentoActual.getSeconds()
+
+        horaImprimible = hora + " : " + minuto + " : " + segundo
+
+        document.form_reloj.reloj.value = horaImprimible
+
+        setTimeout("mueveReloj()",1000)
+    }
+  </script>
+
+	<title></title>
+</head>
+<body onload="mueveReloj()">
+	<script src="js/jquery-3.5.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<div class="row">
+		<div class="col-md-12 d-flex justify-content-between bg-dark text-light">
+			<h1></h1>
+			<h1>PhotoDrop</h1>
+			<img class="pt-3 pr-3" src="ico/png/PhotodropLight.png" width="35" height="35" >
+		</div>
+	</div>
+
+    <div class="row bg-dark d-flex justify-content-center pl-50">
+		<div id="carouselExampleControls" class="carousel slide pl-60" data-ride="carousel">
+	  		<div class="carousel-inner">
+	    		<div class="carousel-item active">
+                    <div class="d-flex justify-content-center">
+                        <img 
+                        height="500" 
+                        width="500" 
+                        class="d-block img-fluid" 
+                        src="photos/img1.jpg" 
+                        alt="First slide">
+                    </div>
+	    		</div>
+	    		<div class="carousel-item">
+                    <div class="d-flex justify-content-center">
+	      			  <img 
+                      height="500" 
+                      width="500" 
+                      class="d-block img-fluid" 
+                      src="photos/img2.jpg" 
+                      alt="Second slide">
+                    </div>
+	    		</div>
+	    		<div class="carousel-item">
+                    <div class="d-flex justify-content-center">
+	      			  <img 
+                      height="500" 
+                      width="500" 
+                      class="d-block img-fluid"
+                      src="photos/img3.jpg" 
+                      alt="Third slide">
+                    </div>
+	    		</div>
+	  		</div>
+	  		<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+	    	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    	<span class="sr-only">Previous</span>
+	  		</a>
+	  		<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+	    	<span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    	<span class="sr-only">Next</span>
+	  		</a>
+		</div>
+	</div>
+    <div class="row d-flex justify-content-center">
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Más Info
+    </button>
+    </div>
+    <br>
+    <br>
+
+    
+    <div class="row d-flex justify-content-center">
+      <form name="form_reloj" class="">
+        <input type="text" name="reloj" size="10" class="border-0 d-flex justify-content-center h2">
+      </form>
+    </div>
+    
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">Más Información</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            
+          </div>
+          <div class="modal-body">
+            <p>Esta página muestra imagenes en un carrusel</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+	<div class="area"></div><nav class="main-menu">
+            <ul>
+                <li>
+                    <a href="html/session/login.html">
+                        <i class="fa fa-2x"><img src="ico/png/018-user.png" width="25" height="25"></i>
+                        <span class="nav-text">
+                            Login
+                        </span>
+                    </a>
+                </li>
+                <li class="has-subnav">
+                    <a href="html/session/login.html">
+                        <i class="fa fa-2x"><img src="ico/png/021-user.png" width="25" height="25"></i>
+                        <span class="nav-text">
+                            Sing up
+                        </span>                    
+                </li>
+                <li class="has-subnav">
+                    <a href="#">
+                       <i class="fa fa-list fa-2x"></i>
+                        <span class="nav-text">
+                            Productos
+                        </span>
+                    </a>
+                    
+                </li>
+                <li>
+                    <a href="#">
+                       <i class="fa fa-info fa-2x"></i>
+                        <span class="nav-text">
+                            Información
+                        </span>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="logout">
+                <li>
+                   <a href="#">
+                         <i class="fa fa-power-off fa-2x"></i>
+                        <span class="nav-text">
+                            Logout
+                        </span>
+                    </a>
+                </li>  
+            </ul>
+        </nav>
+
+</body>
+</html>

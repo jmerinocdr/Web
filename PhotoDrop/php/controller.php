@@ -1,0 +1,13 @@
+<?php
+require_once("../lib/lib.php");
+checkSession();
+$action="";
+if(!empty($_POST['action'])){
+    $action=$_POST['action'];
+}
+if(!empty($_GET['action'])){
+    $action=$_GET['action'];
+}
+include_once("../inc/header.php");
+include_once("../tpl/{$action}.php");
+include_once("../inc/footer.php");

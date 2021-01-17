@@ -1,0 +1,58 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+footer {
+    text-align: center;
+}
+
+form {
+    display: inline;
+}
+
+input[type=submit] {
+    background-color: black;
+    color: white;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+h1 {
+    color: blueviolet;
+}
+
+img {
+    max-width: 100px;
+    vertical-align: top;
+}
+
+label {
+    display: block;
+    min-height: 2rem;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: paleturquoise;
+}
+
+td, th {
+    border: 1px solid blue;
+    padding: 0.2rem;
+}
+
+.menu {
+    float: right;
+}
+
+.warning {
+    font-weight: bold;
+    color: red;
+}
+
+footer p {
+    font-size: small;
+}
