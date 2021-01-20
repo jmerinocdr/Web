@@ -91,4 +91,8 @@ class RestaurantesController extends AbstractController
 
         return $this->redirectToRoute('restaurantes_index');
     }
+
+    public function __toString(){
+        return (string)$this->CodRes;
+    }
 }

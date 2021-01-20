@@ -23,6 +23,7 @@ html{
     height: 5%;
     top: 15%;
     right: 30%;
+    text-align: center;
 }
 .registert{
     position: absolute;
@@ -32,6 +33,7 @@ html{
     height: 5%;
     top: 15%;
     left: 30%;
+    text-align: center;
 }
 
 .login, .register{
@@ -42,6 +44,7 @@ html{
     width: 30%;
     height: 30%;
     background-color: aqua;
+    text-align: center;
     border-radius: 1em;
 }
 
