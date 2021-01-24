@@ -1,0 +1,8 @@
+{% if app.user %}
+    <div class="menu">
+        <p>
+            {{app.user.username}}
+            <a href="{{ path('app_logout') }}">Salir</a>
+        </p>
+    </div>
+{% endif %}

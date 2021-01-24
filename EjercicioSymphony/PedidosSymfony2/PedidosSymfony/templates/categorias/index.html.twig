@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista Categorias{% endblock %}
+
+{% block body %}
+    <h1>Lista Categorias</h1>
+
+        {% for categoria in categorias %}
+                
+            <p><a method="post" href="{{ path('productos_index', {'categoriaid': categoria.id}) }}">{{ categoria.Nombre }}</a></p>
+        {% else %}
+            <tr>
+                <td colspan="5">No se encontraron registros</td>
+            </tr>
+        {% endfor %}
+{% endblock %}

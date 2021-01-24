@@ -13,13 +13,14 @@ class DefaultController extends AbstractController
      */
     public function index(): Response
     {
+        if($this->isGranted('ROLE_ADMIN')){
+            return $this->redirectToRoute('categoria_index');
+        }
         if($this->isGranted('ROLE_USER')){
-            return $this->redirectToRoute('categorias_index');
+            return $this->redirectToRoute('categoria_lista');
         }
-        else{
-            return $this->render('default/index.html.twig', [
-                'controller_name' => 'DefaultController',
-            ]);
-        }
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
     }
 }

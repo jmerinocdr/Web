@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista Restaurantes{% endblock %}
+
+{% block body %}
+    <h1>Lista Restaurantes</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>CodRes</th>
+                <th>Correo</th>
+                <th>Clave</th>
+                <th>CP</th>
+                <th>Ciudad</th>
+                <th>Direccion</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for restaurante in restaurantes %}
+            <tr>
+                <td>{{ restaurante.id }}</td>
+                <td>{{ restaurante.CodRes }}</td>
+                <td>{{ restaurante.Correo }}</td>
+                <td>{{ restaurante.Clave }}</td>
+                <td>{{ restaurante.CP }}</td>
+                <td>{{ restaurante.Ciudad }}</td>
+                <td>{{ restaurante.Direccion }}</td>
+                <td>
+                    <a href="{{ path('restaurantes_show', {'id': restaurante.id}) }}">Ver</a>
+                    <a href="{{ path('restaurantes_edit', {'id': restaurante.id}) }}">Editar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">No se encontraron registros</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('restaurantes_new') }}">Crear nuevo</a>
+{% endblock %}

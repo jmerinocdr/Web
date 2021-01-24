@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categoria index{% endblock %}
+
+{% block body %}
+    <h1>Categoria index</h1>
+
+    <div class="table">
+        <tbody>
+        {% for categorium in categorias %}
+            <a href="{{ path('producto_lista', {'categoriaid': categorium.id}) }}">
+                <div>
+                    <p>{{ categorium.Nombre }}</p>
+                    <p>{{ categorium.Descripcion }}</p>
+                </div>
+            </a>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </div>
+{% endblock %}
