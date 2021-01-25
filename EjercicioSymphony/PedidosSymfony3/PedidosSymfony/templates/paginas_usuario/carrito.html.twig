@@ -2,6 +2,7 @@
 {% extends 'base.html.twig' %}
 {% block title %}Carrito de la compra{% endblock %}
 {% block body %}
+<div class="contenido">
 {% if productos is empty %}
 <p> El carrito está vacío </p>
 {% else %}
@@ -29,5 +30,6 @@
     {% endfor %}
 </table>
 <a href = {{ path('hacer_pedido') }}>Realizar Pedido</a>
+</div>
 {% endif %}
 {% endblock %}

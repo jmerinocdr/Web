@@ -1,8 +1,10 @@
 {% if app.user %}
     <div class="menu">
         <p>
-            {{app.user.username}}
-            <a href="{{ path('app_logout') }}">Salir</a>
+            <a id="usuario">{{app.user.username}}</a>
+            <a id="salir" href="{{ path('app_logout') }}">Salir</a>
+            <a id="categorias" href="{{ path('categoria_lista') }}">Categorias</a>
+            <a id="carrito" href="{{ path('ver_carrito') }}">Salir</a>
         </p>
     </div>
 {% endif %}

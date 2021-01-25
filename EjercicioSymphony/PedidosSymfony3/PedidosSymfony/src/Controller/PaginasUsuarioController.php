@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\CategoriaController;
+/*use Symfony\Component\Validator\Constraints\Email;*/
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Pedido;
 use App\Entity\Categoria;
 use App\Entity\Producto;
+use App\Entity\User;
 use App\Repository\CategoriaRepository;
 use App\Repository\ProductoRepository;
 
@@ -77,20 +80,20 @@ class PaginasUsuarioController extends AbstractController
     * @Route("/eliminar_carrito", name="eliminar_carrito")
     */
     public function eliminar_carrito(SessionInterface $session){
-    $id = $_POST['id'];
-    $unidades= $_POST['unidades'];
-    $carrito = $session->get('carrito');
-    if(is_null($carrito)){
-    $carrito = array();
-    }
-    if(isset($carrito[$id])){
-    $carrito[$id]['unidades'] -= intval($unidades);
-    if($carrito[$id]['unidades'] <= 0) {
-    unset($carrito[$id]);
-    }
-    }
-    $session->set('carrito', $carrito);
-    return $this->redirectToRoute('carrito');
+        $id = $_POST['id'];
+        $unidades= $_POST['unidades'];
+        $carrito = $session->get('carrito');
+        if(is_null($carrito)){
+            $carrito = array();
+        }
+        if(isset($carrito[$id])){
+            $carrito[$id]['unidades'] -= intval($unidades);
+        if($carrito[$id]['unidades'] <= 0) {
+            unset($carrito[$id]);
+        }
+        }
+        $session->set('carrito', $carrito);
+        return $this->redirectToRoute('carrito');
     }
 
     /**
@@ -138,14 +141,17 @@ class PaginasUsuarioController extends AbstractController
     $entityManager = $this->getDoctrine()->getManager();
     $carrito = $session->get('carrito');
     /* si el carrito no existe, o está vacío*/
-    if(is_null($carrito) ||count($carrito)==0){
-        return $this->render("pedido.html.twig",
+    /*||count($carrito)==0*/
+    if(is_null($carrito)||count($carrito)==0 ){
+        return $this->render("paginas_usuario/pedido.html.twig",
         array('error'=>1));
     }
     else{
         #crear un nuevo pedido
         $pedido = new Pedido();
         $pedido->setFecha(new \DateTime());
+        $pedido->setPeso(0);
+        $pedido->setPrecio(0);
         $pedido->setEnviado(0);
         $pedido->setUser($this->getUser());
         $entityManager->persist($pedido);
@@ -169,7 +175,7 @@ class PaginasUsuarioController extends AbstractController
     try{
     $entityManager->flush();
     }catch (Exception $e) {
-    return $this->render("pedido.html.twig",
+    return $this->render("paginas_usuario/pedido.html.twig",
     array( 'error'=>2));
     }
     /*prepara el array de productos para la plantilla*/
@@ -178,7 +184,7 @@ class PaginasUsuarioController extends AbstractController
     ->getRepository(Producto::class)
     ->find((int)$codigo);
     $elem = [];
-    $elem['codProd'] = $producto->getCodProd();
+    $elem['id'] = $producto->getId();
     $elem['nombre'] = $producto->getNombre();
     $elem['peso'] = $producto->getPeso();
     $elem['stock'] = $producto->getStock();
@@ -191,16 +197,16 @@ class PaginasUsuarioController extends AbstractController
 
     /* mandar el correo */
     $message = (new Email())
-    ->from('noreply@empresafalsa.com', 'Sistema de pedidos')
-    ->to($this->getUser()->getCorreo())
-    ->subject("Pedido ". $pedido->getCodPed(). "confirmado")
-    ->html($this->renderView('correo.html.twig',
-    array('id'=>$pedido->getCodPed(),
+    ->from('jmerino.cdr@gmail.com')
+    ->to($this->getUser()->getEmail())
+    ->subject("Pedido ". $pedido->getId(). "confirmado")
+    ->html($this->renderView('paginas_usuario/correo.html.twig',
+    array('id'=>$pedido->getId(),
     'productos'=> $productos)),
     'text/html');
     $mailer->send($message);
-    return $this->render("pedido.html.twig",
-    array('error'=>0,'id'=>$pedido->getCodPed(),
+    return $this->render("paginas_usuario/pedido.html.twig",
+    array('error'=>0,'id'=>$pedido->getId(),
     'productos'=> $productos));
     }
 }
