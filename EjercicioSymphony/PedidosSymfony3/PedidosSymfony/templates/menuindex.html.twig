@@ -1,0 +1,10 @@
+<div class="menu">
+    <a id="inicio" href="{{ path ( 'default' ) }}">Volver al inicio</a>
+    {% if (controller_name == "Register") %}
+        <a id="ira" href="{{ path ( 'app_login' ) }}">Ir al login</a>
+    {% endif %}
+    {% if (controller_name == "Login") %}
+        <a id="ira" href="{{ path ( 'app_register' ) }}">Ir al registro</a>
+    {% endif %}
+    
+</div>

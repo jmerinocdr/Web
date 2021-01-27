@@ -3,22 +3,24 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
+    {{ include('menuindex.html.twig')}}
     {% for flashError in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
+    <div id="registerbox">
+        <h1>Regístrate</h1>
 
-    <h1>Register</h1>
+        {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.Direccion) }}
+            {{ form_row(registrationForm.CP) }}
+            {{ form_row(registrationForm.Pais) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+            {{ form_row(registrationForm.agreeTerms) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.Direccion) }}
-        {{ form_row(registrationForm.CP) }}
-        {{ form_row(registrationForm.Pais) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+            <button type="submit" class="btn">Register</button>
+        {{ form_end(registrationForm) }}
+    </div>
 {% endblock %}

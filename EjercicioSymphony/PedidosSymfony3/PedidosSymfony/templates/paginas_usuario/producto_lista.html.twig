@@ -3,45 +3,45 @@
 {% block title %}Producto index{% endblock %}
 
 {% block body %}
-    <h1>Producto index</h1>
-    {{ categoriaid }}
+    <div class="title">
+        <h1>Productos</h1>
+    </div>
+    <div class="contenido">
+        
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Descripcion</th>
-                <th>Peso</th>
-                <th>Precio</th>
-                <th>Stock</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for producto in productos %}
-            <tr>
-                <td>{{ producto.id }}</td>
-                <td>{{ producto.Nombre }}</td>
-                <td>{{ producto.Descripcion }}</td>
-                <td>{{ producto.Peso }}</td>
-                <td>{{ producto.Precio }}</td>
-                <td>{{ producto.Stock }}</td>
-                <td>
-                    <form action = "{{ path('anadir_carrito') }}" method="post">
-                        <input name="unidades" type="number" min="1" value="1">
-                        <input type="submit" value="Comprar">
-                        <input name="id" type="hidden" value="{{producto.id}}">
-                    </form>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('producto_new') }}">Create new</a>
+        <table border="1" class="tableproduct">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Peso</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Comprar</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for producto in productos %}
+                <tr>
+                    <td id="pnombre">{{ producto.Nombre }}</td>
+                    <td id="pdescripcion">{{ producto.Descripcion }}</td>
+                    <td id="ppeso">{{ producto.Peso }}g</td>
+                    <td id="pprecio">{{ producto.Precio }}€</td>
+                    <td id="pstock">{{ producto.Stock }}</td>
+                    <td>
+                        <form action = "{{ path('anadir_carrito') }}" method="post">
+                            <input name="unidades" type="number" min="1" value="1">
+                            <input type="submit" value="Comprar">
+                            <input name="id" type="hidden" value="{{producto.id}}">
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

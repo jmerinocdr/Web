@@ -73,7 +73,7 @@ class PaginasUsuarioController extends AbstractController
             $carrito[$id]['unidades'] = intval($unidades);
         }
         $session->set('carrito', $carrito);
-        return $this->redirectToRoute('ver_carrito');
+        return $this->redirectToRoute('categoria_lista');
     }
 
     /**
@@ -93,7 +93,7 @@ class PaginasUsuarioController extends AbstractController
         }
         }
         $session->set('carrito', $carrito);
-        return $this->redirectToRoute('carrito');
+        return $this->redirectToRoute('ver_carrito');
     }
 
     /**

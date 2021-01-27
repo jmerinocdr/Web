@@ -2,34 +2,39 @@
 {% extends 'base.html.twig' %}
 {% block title %}Carrito de la compra{% endblock %}
 {% block body %}
+    <div class="title">
+        <h1>Carrito</h1>
+    </div>
 <div class="contenido">
-{% if productos is empty %}
-<p> El carrito está vacío </p>
-{% else %}
-<table>
-    <tr>
-        <th>Nombre</th><th>Descripción</th>
-        <th>Stock</th><th>Peso</th><th>Unidades</th><th>Eliminar</th>
-    </tr>
-    {% for producto in productos %}
-    <tr>
-        <td>{{ producto.nombre }}</td>
-        <td>{{ producto.descripcion }}</td>
-        <td>{{ producto.stock }}</td>
-        <td>{{ producto.peso }}</td>
-        <td>{{ producto.unidades }}</td>
-        <td>
-            <form action="{{path('eliminar_carrito')}}" method = 'POST'>
-                <input name='unidades' type='number' min ='1' value= '1'>
-                <input type = 'submit' value='Eliminar'>
-                <input name = 'id' type='hidden'
-                value = {{producto.id}}>
-            </form>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
-<a href = {{ path('hacer_pedido') }}>Realizar Pedido</a>
+    {% if productos is empty %}
+    <p> El carrito está vacío </p>
+    {% else %}
+    <table border="1" class="tablecarrito">
+        <tr>
+            <th>Nombre</th><th>Descripción</th>
+            <th>Stock</th><th>Peso</th><th>Unidades</th><th>Eliminar</th>
+        </tr>
+        {% for producto in productos %}
+        <tr>
+            <td id="pnombre">{{ producto.nombre }}</td>
+            <td id="pdescripcion">{{ producto.descripcion }}</td>
+            <td id="pstock">{{ producto.stock }}</td>
+            <td id="ppeso">{{ producto.peso }}</td>
+            <td id="punidades">{{ producto.unidades }}</td>
+            <td>
+                <form action="{{path('eliminar_carrito')}}" method = 'POST'>
+                    <input name='unidades' type='number' min ='1' value= '1'>
+                    <input type = 'submit' value='Eliminar'>
+                    <input name = 'id' type='hidden'
+                    value = {{producto.id}}>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div id="hpedido">
+        <a href = {{ path('hacer_pedido') }}>Realizar Pedido</a>
+    </div>
 </div>
 {% endif %}
 {% endblock %}

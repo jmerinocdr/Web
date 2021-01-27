@@ -1,6 +1,38 @@
 body{
     background-color: antiquewhite;
 }
+
+label{
+    padding-top: 2%;
+}
+a{
+    text-decoration: none;
+}
+
+.alert{
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 60%;
+    height: 10%;
+    background-color: rgb(255, 137, 68);
+    font-size: 200%;
+    text-align: center;
+    padding-top: 4%;
+}
+
+.title{
+    position: absolute;
+    top: 5%;
+    left: 0%;
+    width: 100%;
+    height: 10%;
+    background-color:  rgb(253, 203, 137);
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 105%;
+}
+
 .menu{
     position: absolute;
     top: 0;
@@ -9,17 +41,189 @@ body{
     height: 5%;
     background-color: rgb(253, 203, 137);
 }
+.menu #inicio{
+    position: absolute;
+    top: 14%;
+    left: 1%;
+    text-decoration: none;
+    background-color:  rgb(255, 218, 97);
+    padding: 0.5%;
+}
+
+.menu #ira{
+    position: absolute;
+    top: 14%;
+    right: 1%;
+    text-decoration: none;
+    background-color:  rgb(255, 218, 97);
+    padding: 0.5%;
+}
+
 .menu #usuario{
+    position: absolute;
+    top: 14%;
+    left: 1%;
     background-color: rgb(255, 214, 100);
     border-radius: 0.5em;
-    padding: 0.6em;
+    padding: 0.5%;
+}
+.menu #salir{
+    text-decoration: none;
+    color: black;
+    position: absolute;
+    top: 14%;
+    right: 10%;
+    background-color: rgb(255, 214, 100);
+    border-radius: 0.5em;
+    padding: 0.5%;
+}
+.menu #categorias{
+    text-decoration: none;
+    color: black;
+    position: absolute;
+    top: 14%;
+    right: 4%;
+    background-color: rgb(255, 214, 100);
+    border-radius: 0.5em;
+    padding: 0.5%;
+}
+.menu #carrito{
+    position: absolute;
+    top: 14%;
+    right: 1%;
+    background-color: rgb(255, 214, 100);
+    border-radius: 0.5em;
+    padding: 0.2%;
+}
+.menu #carrito img{
+    width: 30px;
 }
 
 .contenido{
     position: absolute;
-    top: 5%;
+    top: 15%;
     left: 5%;
     width: 95%;
     height: 90%;
     
+}
+.categoria{
+    width: 40%;
+    height: 25%;
+    background-color: rgb(255, 214, 100);
+}
+
+.tableproduct{
+    position: relative;
+    top: 5%;
+    width: 90%;
+    background-color: rgb(255, 214, 100);
+    border: 1 solid black;
+    border-collapse: collapse;
+}
+.tableproduct th, .tableproduct td{
+    padding: 1%;
+}
+
+.tablecarrito{
+    position: relative;
+    top: 5%;
+    width: 90%;
+    background-color: rgb(255, 214, 100);
+    border: 1 solid black;
+    border-collapse: collapse;
+}
+.tablecarrito th, .tablecarrito td{
+    padding: 1%;
+}
+
+#login{
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    width: 40%;
+    height: 20%;
+    padding: 1%;
+    background-color: rgba(255, 218, 97, 0.507);
+    text-align: center;
+    font-size: 3em;
+}
+#registro{
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    width: 40%;
+    height: 20%;
+    padding: 1%;
+    background-color: rgb(255, 218, 97);
+    text-align: center;
+    font-size: 3em;
+}
+
+#loginbox{
+    position: absolute;
+    top: 15%;
+    left: 40%;
+    width: 20%;
+    height: 50%;
+    background-color:  rgb(255, 218, 97);
+    padding: 1%;
+}
+#loginbox h1{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#registerbox{
+    position: absolute;
+    top: 15%;
+    left: 40%;
+    width: 20%;
+    height: 50%;
+    background-color:  rgb(255, 218, 97);
+    padding: 1%;
+}
+#registerbox h1{
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+#nombre{
+    text-decoration: none;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 200%;
+    color: black;
+    padding-top: 2%;
+    padding-left: 2%;
+}
+#descripcion{
+    text-decoration: none;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 120%;
+    color: black;
+    padding-top: -10%;
+    padding-left: 2%;
+    padding-bottom: 2%;
+}
+
+#pnombre{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 150%;
+}
+
+#hpedido{
+    position: fixed;
+    right: 5%;
+    bottom: 10%;
+    width: 10%;
+    height: 2%;
+    background-color: rgb(255, 218, 97);
+    padding: 1%;
+    text-align: center;
+    text-decoration-color: black;
+    border-radius: 0.5em;
+}
+#hpedido a{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 110%;
+    color: black;
 }
